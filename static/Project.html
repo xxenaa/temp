@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href = "css/main.css">
+    
+</head>
+<body>
+
+<div class="hero">
+<div class="form-box">
+
+
+	<form action="/new" method="POST">
+  
+    <label for="fullName">Full Name:</label>
+      <input type="fullName" class="input" id="fullName" name= "name" placeholder="Please Type Your Full Name"><br>
+   
+    <label for="inputAddress" >Address</label>
+      <input type="text" class="input" id="inputAddress" name="address" placeholder="1234 Example St"><br>
+
+  
+    <label for="inputAddress2">Address 2</label>
+      <input type="text" class="input" id="inputAddress2"  name="addy2" placeholder="Apartment, studio, or floor"><br>
+
+    <label for="inputCity">City</label>
+      <input type="text" class="input" id="inputCity" ><br>
+
+    <label for="inputState">State</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+          <option value="1">TX</option>
+  			  <option value="2">CA</option>
+  			  <option value="3">PS</option>
+        </option>
+      </select><br>
+    
+    <label for="inputZip">Zip</label>
+      <input type="text" class="input" id="inputZip" minlength="5">
+    
+
+<!--  <a href="fuel"> --> <button type="submit" class="submit"><a href="fuel">Sign in</a></button>
+</form>
+</div>
+
+
+</body>
+</html>

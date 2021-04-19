@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+		<title>Login</title>
+		<link rel="stylesheet" href = "css/main.css">
+
+	</head>
+	<body>
+		  <div class="hero">
+        <div class="form-box">
+            <div class="button-box">
+                    <div id="btn"></div>
+                    <button type="button" class="toggle-btn" onclick="login()">Log in</button>
+                   <a href="index.html"> <button type="button" class="toggle-btn" onclick="register()" hr>Register</button></a>
+            </div>
+		<form id="login" class="input-group">
+			<input type="text" autocomplete="off"  class="input-field" id="username" placeholder="Username" required>
+			<input type="password" autocomplete="off"  class="input-field" id="password" placeholder="Password" required>
+			<input type="checkbox" class="check-box"><span>Remember password?</span>
+			<input type="submit" class="submit-btn" id="login-button" value="Login" /> 		
+		</form>
+<!-- 		 <form id="login" class="input-group">
+                <input type="text" class="input-field" id="user"  placeholder="User ID" required>
+                <input type="text" class="input-field" id="password" placeholder="Enter Password" required>
+                <input type="checkbox" class="check-box"><span>Remember password?</span>
+               <a href="fuel"> <button  type="submit" class="submit-btn" id="login-button" >Log in</button> </a>
+            </form>
+ -->
+       </div>
+</div>
+    
+		<script>
+
+
+
+
+			const form = document.getElementById('login')
+			form.addEventListener('submit', login)
+
+			async function login(event) {
+				event.preventDefault()
+				const username = document.getElementById('username').value
+				const password = document.getElementById('password').value
+
+				const result = await fetch('/api/login', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						username,
+						password
+					})
+				}).then((res) => res.json())
+
+				if (result.status === 'ok') {
+					// everythign went fine
+					console.log('Got the token: ', result.data)
+					localStorage.setItem('token', result.data)
+					alert('Success')
+					document.location.href = "/project"
+				} else {
+					alert(result.error)
+				}
+			}
+
+
+		</script>
+	
+		
+</body>
+</html>

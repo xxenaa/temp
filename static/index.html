@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" id="registration">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+		<title>Registration</title>
+		<link rel="stylesheet" href = "css/main.css">
+
+	</head>
+	<body>
+		<div class="hero">
+        <div class="form-box">
+		 <div class="button-box">
+                    <div id="btn"></div>
+                  <a href="login.html">  <button type="button" class="toggle-btn" onclick="login()">Log in</button></a>
+                   <button type="button" class="toggle-btn" onclick="register()" hr>Register</button>
+            </div>
+
+		<form id="reg-form" class="input-group">
+			<input type="text" class="input-field" autocomplete="off" id="username" placeholder="Username" />
+			<input type="password" class="input-field"  autocomplete="off" id="password" placeholder="Password" />
+			 <input type="checkbox" class="check-box" required><span>I agree to the terms & conditions</span>
+			<input type="submit" class="submit-btn" value="Register" />
+		</form>
+</div>
+</div>
+		<script>
+			const form = document.getElementById('reg-form')
+			var z = document.getElementById("btn");
+			form.addEventListener('submit', registerUser)
+
+			async function registerUser(event) {
+				event.preventDefault()
+				const username = document.getElementById('username').value
+				const password = document.getElementById('password').value
+
+				const result = await fetch('/api/register', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						username,
+						password
+					})
+				}).then((res) => res.json())
+
+				if (result.status === 'ok') {
+					// everythign went fine
+					alert('Success')
+					             document.location.href = "/login"
+
+				} else {
+					alert(result.error)
+				}
+			}
+
+
+
+
+		</script>
+	</body>
+</html>
