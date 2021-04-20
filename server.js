@@ -5,7 +5,10 @@ const mongoose = require('mongoose')
 const User = require('./model/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { db } = require('./model/user')
+const app = express()
+const ejs = require('ejs')
+
+app.set('view engine', 'ejs')
 
 const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
@@ -16,8 +19,8 @@ mongoose.connect('mongodb+srv://user:M2Zlp25kFD8cKnGr@cluster0.3wohx.mongodb.net
 })
 
 
-const app = express()
-app.set('view engine', 'ejs')
+
+
 app.set('static', path.join(__dirname, 'static'));
 app.use('/', express.static(path.join(__dirname, 'static')))
 app.use(express.urlencoded())
@@ -30,14 +33,17 @@ app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
 app.use('/img', express.static(__dirname + 'public/img'))
 
+// app.get('/', (req,res) =>{
+// 	let name= 'Marina'
+
+//     res.render('fuel',{
+// 		username: name
+// 	})
+// })
 
 
+//app.set('static','./static')
 
-app.set('static','./static')
-
-app.get('/fuel', (req,res) =>{
-    res.sendFile(__dirname + '/static/fuel.html')
-})
 app.get('/project', (req,res) =>{
     res.sendFile(__dirname + '/static/Project.html')
 })
@@ -54,14 +60,16 @@ var Schema = new mongoose.Schema({
 	address2: String
 })
 var userA=mongoose.model('info', Schema)
-const UserData = mongoose.model('UserData', Schema);
-// app.get('/fuel', (req,res)=> {
-//     UserData.find({}, function(err, users) {
-//         res.render('fuel', {
-//             UserAddress: users
-//         });
-//     })
-// })
+
+app.get('/fuel', (req,res) =>{
+	userA.find({}, function(err, data){
+		res.render('fuel', {
+			list: data
+		})
+	})
+	
+ })
+
 app.post('/new',function(req,res){
 	new userA({
 		name: req.body.name,
@@ -72,6 +80,7 @@ app.post('/new',function(req,res){
 		else res.redirect('/fuel')
 	})
 })
+
 
 app.get('/', function(req,res){
 	var result = [];
