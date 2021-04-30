@@ -158,10 +158,23 @@ td {
 }
 .form {
 	width: 400px;
-	height: 300px;
+	height: 400px;
 	position: relative;
 	margin: 1% auto;
 	background: #fff;
 	padding: 5px;
 	overflow: hidden;
 }
+.sub {
+	width: 85%;
+	padding: 10px 30px;
+	cursor: pointer;
+	display: block;
+	margin: auto;
+	background: linear-gradient(to right, #ff105f, #ffad06);
+	border: 0;
+	outline: none;
+	border-radius: 30px;
+	margin-top: 5px;
+}
+
