@@ -12,27 +12,46 @@
              
    <div class="form">
       
-   <form>
+   <form name="fuelstuff">
        <label for="Gallons Required">Gallons Required: </label>
-       <input type="number" class="input" name="Gallons Required" placeholder="enter numerical value"><br><br>
+       <input type="text" class="input" name="GallonsRequired" placeholder="enter numerical value"><br><br>
 
-        <label for="Delivery Address">Delivery Address:</label><br>
-        <%list.forEach(user => {%>
-            <p><%= user.address %></p>
-            <p><%= user.address2 %></p>
-        <%})%>
+       <label for="Delivery Address">Delivery Address:</label>
+       <%list.forEach(user => {%>
+           <p><%= user.address %></p>
+           <%= user.address2 %>
+       <%})%> 
+
  
         <label for="Delivery Date">Delivery Date: </label>
         <input type="date" name="Delivery Date"><br><br>
-          
-        <label for="Suggested Price">Sugessted Price: 0.00</label><br>
-          
-        <label for="Total Amount Due">Total Amount Due: 0.00</label><br>
-          
-       
-    </form>
-    </div>
 
+        <input type="button" class="sub" value="Submit" onClick="sum()"><br> 
+
+        <label for="Suggested Price/Gallon">Sugessted Price: </label>
+        <input type="text" class="input" name="output1"><br>
+          
+        <label for="Total Amount Due">Total Amount Due: </label>
+        <input type="text" class="input" name="output2">
+          
+    </form>
+    <script type="text/javascript">
+        function sum(){
+            var gallons = parseInt(document.fuelstuff.GallonsRequired.value);
+            var grf;
+            if(gallons >= 1000)
+                grf = .02;
+            else
+                grf= .03;
+            var margin = (0.02+ grf +.1) *1.5;
+            var output= 1.5 + margin;
+            document.fuelstuff.output1.value= output;
+            var amountdue= output*gallons;
+            document.fuelstuff.output2.value= amountdue;
+        }
+    </script>
+    </div>
+    
     <div class="table-box">
        <h1>Fuel Quote History</h1>
     <table>
